@@ -21,7 +21,7 @@ function App() {
     } else {
       localStorage.setItem('appointments', JSON.stringify([]));
     }
-  }, [appointments]);
+  }, [appointments, initialAppointments]);
 
   //Create appointment
   const createAppointment = (appointment) => {
