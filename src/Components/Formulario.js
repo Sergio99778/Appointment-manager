@@ -1,5 +1,6 @@
 import React, { Fragment, useState } from 'react';
 import uuid from 'uuid/dist/v4';
+import PropTypes from 'prop-types';
 
 const Formulario = ({ createAppointment }) => {
   //State Appointments
@@ -73,6 +74,10 @@ const Formulario = ({ createAppointment }) => {
       </form>
     </Fragment>
   );
+};
+
+Formulario.propTypes = {
+  createAppointment: PropTypes.func.isRequired,
 };
 
 export default Formulario;
