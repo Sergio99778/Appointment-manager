@@ -1,7 +1,8 @@
 import React, { Fragment, useState } from 'react';
+import uuid from 'uuid/dist/v4';
 
-const Formulario = () => {
-  //Adding State Appointments
+const Formulario = ({ createAppointment }) => {
+  //State Appointments
   const [appointment, setAppointment] = useState({
     pet: '',
     owner: '',
@@ -9,6 +10,8 @@ const Formulario = () => {
     time: '',
     sintoms: '',
   });
+  //State Error
+  const [error, setError] = useState(false);
 
   //Handle Change
   const handleChange = (e) => {
@@ -17,11 +20,42 @@ const Formulario = () => {
       [e.target.name]: e.target.value,
     });
   };
+
+  //Handle Submit
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    //Validate
+    if (pet.trim() === '' || owner.trim() === '' || date.trim() === '' || time.trim() === '' || sintoms.trim() === '') {
+      setError(true);
+    }
+    //Delete error message
+    setError(false);
+
+    //Asssign ID
+    appointment.id = uuid();
+
+    //Create appointment
+    createAppointment(appointment);
+
+    //Reset form
+    setAppointment({
+      pet: '',
+      owner: '',
+      date: '',
+      time: '',
+      sintoms: '',
+    });
+  };
+
   const { pet, owner, date, time, sintoms } = appointment;
   return (
     <Fragment>
       <h2>Create appointment</h2>
-      <form action="">
+
+      {error ? <p className="alerta-error">Todos los campos son obligatorios</p> : null}
+
+      <form action="" onSubmit={handleSubmit}>
         <label htmlFor="">Pet's name</label>
         <input name="pet" className="u-full-width" type="text" placeholder="Pet's name" onChange={handleChange} value={pet} />
         <label htmlFor="">Owner's name</label>
