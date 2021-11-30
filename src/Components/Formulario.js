@@ -28,10 +28,8 @@ const Formulario = ({ createAppointment }) => {
     e.preventDefault();
 
     //Validate
-    console.log('Handle Submit');
     if (pet.trim() === '' || owner.trim() === '' || date.trim() === '' || time.trim() === '' || sintoms.trim() === '') {
       setError(true);
-      console.log('If');
     } else {
       //Delete error message
       setError(false);
