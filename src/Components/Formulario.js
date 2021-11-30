@@ -10,6 +10,8 @@ const Formulario = ({ createAppointment }) => {
     time: '',
     sintoms: '',
   });
+
+  const { pet, owner, date, time, sintoms } = appointment;
   //State Error
   const [error, setError] = useState(false);
 
@@ -26,29 +28,30 @@ const Formulario = ({ createAppointment }) => {
     e.preventDefault();
 
     //Validate
+    console.log('Handle Submit');
     if (pet.trim() === '' || owner.trim() === '' || date.trim() === '' || time.trim() === '' || sintoms.trim() === '') {
       setError(true);
+      console.log('If');
+    } else {
+      //Delete error message
+      setError(false);
+      //Asssign ID
+      appointment.id = uuid();
+
+      //Create appointment
+      createAppointment(appointment);
+
+      //Reset form
+      setAppointment({
+        pet: '',
+        owner: '',
+        date: '',
+        time: '',
+        sintoms: '',
+      });
     }
-    //Delete error message
-    setError(false);
-
-    //Asssign ID
-    appointment.id = uuid();
-
-    //Create appointment
-    createAppointment(appointment);
-
-    //Reset form
-    setAppointment({
-      pet: '',
-      owner: '',
-      date: '',
-      time: '',
-      sintoms: '',
-    });
   };
 
-  const { pet, owner, date, time, sintoms } = appointment;
   return (
     <Fragment>
       <h2>Create appointment</h2>
