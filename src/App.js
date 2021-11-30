@@ -2,6 +2,7 @@ import React, { Fragment, useState } from 'react';
 
 //Components
 import Formulario from './Components/Formulario';
+import Appointment from './Components/Appointment';
 
 function App() {
   //Appointments array
@@ -20,7 +21,12 @@ function App() {
           <div className="one-half column">
             <Formulario createAppointment={createAppointment} />
           </div>
-          <div className="one-half column">2</div>
+          <div className="one-half column">
+            <h2>Manage your appointments</h2>
+            {appointments.map((appointment) => (
+              <Appointment key={appointment.id} appointment={appointment} />
+            ))}
+          </div>
         </div>
       </div>
     </Fragment>
