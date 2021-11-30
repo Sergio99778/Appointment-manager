@@ -18,6 +18,9 @@ function App() {
     setAppointments(newAppointments);
   };
 
+  //Conditional title
+  const title = appointments.length === 0 ? 'Add some appointments' : 'Manage your appointments';
+
   return (
     <Fragment>
       <h1>Appointment manager</h1>
@@ -27,7 +30,7 @@ function App() {
             <Formulario createAppointment={createAppointment} />
           </div>
           <div className="one-half column">
-            <h2>Manage your appointments</h2>
+            <h2>{title}</h2>
             {appointments.map((appointment) => (
               <Appointment deleteAppointment={deleteAppointment} key={appointment.id} appointment={appointment} />
             ))}
