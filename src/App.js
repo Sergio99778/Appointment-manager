@@ -1,12 +1,27 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 
 //Components
 import Formulario from './Components/Formulario';
 import Appointment from './Components/Appointment';
 
 function App() {
+  //Local storage
+  let initialAppointments = JSON.parse(localStorage.getItem('appointments'));
+  if (!initialAppointments) {
+    initialAppointments = [];
+  }
+
   //Appointments array
-  const [appointments, setAppointments] = useState([]);
+  const [appointments, setAppointments] = useState(initialAppointments);
+
+  //If appointments changes --> update local storage
+  useEffect(() => {
+    if (initialAppointments) {
+      localStorage.setItem('appointments', JSON.stringify(appointments));
+    } else {
+      localStorage.setItem('appointments', JSON.stringify([]));
+    }
+  }, [appointments]);
 
   //Create appointment
   const createAppointment = (appointment) => {
