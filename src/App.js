@@ -12,6 +12,11 @@ function App() {
   const createAppointment = (appointment) => {
     setAppointments([...appointments, appointment]);
   };
+  //Delete appointment
+  const deleteAppointment = (id) => {
+    const newAppointments = appointments.filter((appointment) => appointment.id !== id);
+    setAppointments(newAppointments);
+  };
 
   return (
     <Fragment>
@@ -24,7 +29,7 @@ function App() {
           <div className="one-half column">
             <h2>Manage your appointments</h2>
             {appointments.map((appointment) => (
-              <Appointment key={appointment.id} appointment={appointment} />
+              <Appointment deleteAppointment={deleteAppointment} key={appointment.id} appointment={appointment} />
             ))}
           </div>
         </div>
